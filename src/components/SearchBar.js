@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef} from "react";
 import { FaSearch } from "react-icons/fa";
 import "./SearchBar.css";
 
