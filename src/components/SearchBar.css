@@ -3,8 +3,8 @@
   align-items: center;
   background: rgba(255, 255, 255, 0.1); /* Transparent background */
   padding: 8px 12px;
-  border-radius: 20px;
-  border: 2px solid #FF7F50;
+  border-radius: 30px;
+  border: 2px solid #ff7f50;
   transition: all 0.3s ease-in-out;
   width: 40px;
   overflow: hidden;
@@ -12,7 +12,7 @@
 }
 
 .search-icon {
-  color: #FFF;
+  color: #fff;
   transition: all 0.3s ease-in-out;
 }
 

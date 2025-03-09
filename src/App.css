@@ -16,7 +16,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh; /* Changed from height to min-height */
 }
 
 /* Main container */
@@ -112,9 +112,48 @@ body {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-5px);
+    transform: translateY(-15px);
   }
   100% {
     transform: translateY(0);
+  }
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .app-container {
+    width: 100%;
+    padding: 10px;
+    padding-bottom: 30px; /* Adjusted padding-bottom */
+  }
+
+  .skycast-title {
+    font-size: 24px;
+  }
+
+  .weather-card {
+    padding: 15px;
+    margin: 15px 0;
+  }
+
+  .forecast-item {
+    min-width: 100px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .skycast-title {
+    font-size: 20px;
+  }
+
+  .weather-card {
+    padding: 10px;
+    margin: 10px 0;
+  }
+
+  .forecast-item {
+    min-width: 80px;
+    padding: 6px;
   }
 }
