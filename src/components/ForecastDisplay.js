@@ -33,7 +33,10 @@ function ForecastDisplay({ forecast }) {
     <div className="forecast-container">
       {forecast.map((day, index) => (
         <div key={index} className="forecast-item">
-          <p>{new Date(day.dt_txt).toLocaleDateString("en-GB")}</p>
+          <p>{new Date(day.dt_txt).toLocaleDateString("en-GB", {
+            day: '2-digit',
+            month: '2-digit'
+          })}</p>
           {getWeatherIcon(day.weather[0])}
           <h3>{day.main.temp}°C</h3>
           <p>{day.weather[0].description}</p>

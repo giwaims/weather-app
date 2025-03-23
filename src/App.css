@@ -16,7 +16,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* Changed from height to min-height */
+  min-height: 100vh;
 }
 
 /* Main container */
@@ -42,6 +42,7 @@ body {
   font-weight: bold;
   background: linear-gradient(45deg, #ff9a9e, #fad0c4);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
