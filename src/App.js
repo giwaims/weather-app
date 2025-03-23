@@ -57,11 +57,15 @@ function App() {
     <div className="app-container">
       <header className="header">
         <h1 className="skycast-title">SkyCast</h1>
-        <SearchBar onSearch={fetchWeather} />
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <SearchBar onSearch={fetchWeather} />
+          {loading && <LoadingSpinner />}
+        </div>
       </header>
-      {loading && <LoadingSpinner />}
-      {weatherData && <WeatherDisplay data={weatherData} />}
-      {forecastData.length > 0 && <ForecastDisplay forecast={forecastData} />}
+      <div className="weather-container">
+        {weatherData && <WeatherDisplay data={weatherData} />}
+        {forecastData.length > 0 && <ForecastDisplay forecast={forecastData} />}
+      </div>
     </div>
   );
 }
