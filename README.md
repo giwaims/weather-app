@@ -1,70 +1,79 @@
-# Getting Started with Create React App
+SkyCast Weather Application Documentation
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+ Overview
+SkyCast is a modern, responsive weather application built with React. It features a sleek, glass-morphism design with animated weather icons and a minimalist UI. The app allows users to search for locations and view current weather conditions along with a two-day forecast.
 
-## Available Scripts
+ Tech Stack
+- Framework: React 19.0.0
+- Styling: CSS with custom animations and responsive design
+- Icons: React Icons (Weather Icons)
+- API: OpenWeather API
+- HTTP Client: Native fetch API
+- Fonts: Poppins (main font) and Orbitron (for title)
 
-In the project directory, you can run:
+ Architecture
 
-### `npm start`
+ Component Structure
+1. App.js - Main component that manages state and API calls
+2. SearchBar.js - Expandable search input for location queries
+3. WeatherDisplay.js - Displays current weather conditions
+4. ForecastDisplay.js - Shows weather forecast for upcoming days
+5. LoadingSpinner.js - Loading indicator for API requests
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+ Data Flow
+1. User enters a city name in SearchBar
+2. App.js fetches weather data from OpenWeather API
+3. Current weather is displayed in WeatherDisplay
+4. Forecast data is processed and displayed in ForecastDisplay
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+ Key Features
 
-### `npm test`
+ 1. Expandable Search Bar
+- Minimizes to an icon when not in use
+- Expands on click for clean UI
+- Handles keyboard events (Enter to search, Escape to cancel)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+ 2. Weather Display
+- Shows location, temperature, and conditions
+- Displays "feels like" temperature, humidity, and wind speed
+- Dynamic weather icons based on conditions
 
-### `npm run build`
+ 3. Forecast Display
+- Shows weather forecast for the next two days
+- Each forecast includes date, weather icon, temperature, and conditions
+- Horizontally scrollable on smaller screens
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+ 4. Responsive Design
+- Adapts to desktop, tablet, and mobile screen sizes
+- Font sizes and spacing adjust based on device width
+- Elements maintain readability and aesthetics across devices
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+ 5. Visual Effects
+- Glass-morphism design (translucent elements with blur)
+- Animated weather icons (floating effect)
+- Hover effects on cards for interactive feedback
+- Gradient backgrounds and text
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+ API Integration
+The app uses the OpenWeather API to fetch:
+1. Current weather data (`/data/2.5/weather` endpoint)
+2. 5-day forecast data (`/data/2.5/forecast` endpoint)
 
-### `npm run eject`
+The API responses are processed to extract relevant information and format it for display.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+ UI/UX Design Elements
+- Color Scheme: Purple/blue gradient background with glass-like elements
+- Typography: Poppins for content, Orbitron for the app title
+- Animations: Fade-in and floating animations for weather icons
+- Layout: Centered, card-based design with adequate spacing
+- Interactions: Hover effects, expandable search, smooth transitions
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+ Responsive Breakpoints
+- Default: Desktop/laptop (>768px)
+- Tablet: 768px and below
+- Mobile: 480px and below
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Each breakpoint adjusts font sizes, spacing, and element dimensions to maintain usability.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+ Security Notes
+The OpenWeather API key is currently exposed in the code. In a production environment, this should be managed through environment variables and API proxying.
