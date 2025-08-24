@@ -1,27 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
+import { motion } from "framer-motion";
 import SearchBar from "./components/SearchBar";
-import WeatherDisplay from "./components/WeatherDisplay";
-import ForecastDisplay from "./components/ForecastDisplay";
 import LoadingSpinner from "./components/LoadingSpinner";
 import "./App.css";
+
+const WeatherDisplay = React.lazy(() => import("./components/WeatherDisplay"));
+const ForecastDisplay = React.lazy(() => import("./components/ForecastDisplay"));
 
 function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [forecastData, setForecastData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // Function to fetch weather and forecast data for the given city
   const fetchWeather = async (city) => {
     const apiKey = "c730bd9f12dc88df365cad0bbdb21de9";
     setLoading(true);
     try {
-      // Fetch current weather data
       const weatherRes = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
       );
       const weatherJson = await weatherRes.json();
 
-      // Fetch forecast data
       const forecastRes = await fetch(
         `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`
       );
@@ -29,7 +28,6 @@ function App() {
 
       setWeatherData(weatherJson);
 
-      // Process forecast: select entries after now and group by day (select one per day)
       const now = new Date();
       const forecasts = forecastJson.list.filter((item) => {
         const itemDate = new Date(item.dt_txt);
@@ -43,8 +41,7 @@ function App() {
           forecastByDay[day] = item;
         }
       });
-      // Select the next two days
-      const forecastArray = Object.values(forecastByDay).slice(0, 2);
+      const forecastArray = Object.values(forecastByDay).slice(0, 5); // Show 5 days
       setForecastData(forecastArray);
     } catch (error) {
       console.error("Error fetching weather data:", error);
@@ -54,19 +51,26 @@ function App() {
   };
 
   return (
-    <div className="app-container">
+    <motion.div
+      className="app-container"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+    >
       <header className="header">
         <h1 className="skycast-title">SkyCast</h1>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <SearchBar onSearch={fetchWeather} />
-          {loading && <LoadingSpinner />}
         </div>
       </header>
-      <div className="weather-container">
-        {weatherData && <WeatherDisplay data={weatherData} />}
-        {forecastData.length > 0 && <ForecastDisplay forecast={forecastData} />}
-      </div>
-    </div>
+      {loading && <LoadingSpinner />}
+      <Suspense fallback={<LoadingSpinner />}>
+        <div className="weather-container">
+          {weatherData && <WeatherDisplay data={weatherData} />}
+          {forecastData.length > 0 && <ForecastDisplay forecast={forecastData} />}
+        </div>
+      </Suspense>
+    </motion.div>
   );
 }
 
