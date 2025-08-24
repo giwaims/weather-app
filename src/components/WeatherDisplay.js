@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import {
   WiDaySunny,
   WiRain,
@@ -14,35 +15,57 @@ function WeatherDisplay({ data }) {
   const getWeatherIcon = (weather) => {
     switch (weather.main) {
       case "Clear":
-        return <WiDaySunny size={60} className="weather-icon" />;
+        return <WiDaySunny size={80} className="weather-icon" />;
       case "Rain":
-        return <WiRain size={60} className="weather-icon" />;
+        return <WiRain size={80} className="weather-icon" />;
       case "Clouds":
-        if (weather.description.toLowerCase().includes("overcast")) {
-          return <WiCloudy size={60} className="weather-icon" />;
-        }
-        return <WiCloud size={60} className="weather-icon" />;
+        return <WiCloudy size={80} className="weather-icon" />;
       case "Snow":
-        return <WiSnow size={60} className="weather-icon" />;
+        return <WiSnow size={80} className="weather-icon" />;
       case "Thunderstorm":
-        return <WiThunderstorm size={60} className="weather-icon" />;
+        return <WiThunderstorm size={80} className="weather-icon" />;
       default:
-        return <WiCloud size={60} className="weather-icon" />;
+        return <WiCloud size={80} className="weather-icon" />;
     }
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        type: "spring",
+        stiffness: 150,
+      },
+    },
+  };
+
   return (
-    <div className="weather-card">
-      <h2>
-        {data.name}, {data.sys.country}
-      </h2>
-      {getWeatherIcon(weather)}
-      <h3>{data.main.temp}°C</h3>
-      <p>{weather.description}</p>
-      <p>Feels like: {data.main.feels_like}°C</p>
-      <p>Humidity: {data.main.humidity}%</p>
-      <p>Wind Speed: {data.wind.speed} m/s</p>
-    </div>
+    <motion.div
+      className="weather-card"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <h2>{data.name}, {data.sys.country}</h2>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
+        {getWeatherIcon(weather)}
+        <h1>{Math.round(data.main.temp)}°C</h1>
+      </div>
+      <p style={{ textTransform: 'capitalize' }}>{weather.description}</p>
+      <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '2rem' }}>
+        <div>
+          <p>Humidity</p>
+          <p>{data.main.humidity}%</p>
+        </div>
+        <div>
+          <p>Wind Speed</p>
+          <p>{data.wind.speed} m/s</p>
+        </div>
+      </div>
+    </motion.div>
   );
 }
 
