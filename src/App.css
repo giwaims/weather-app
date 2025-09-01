@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&display=swap');
 
@@ -28,6 +29,18 @@ body {
   font-family: 'Lexend', Arial, sans-serif;
   background: var(--primary-gradient);
   background-attachment: fixed;
+=======
+:root {
+  --background-color: #000000;
+  --text-color: #FFFFFF;
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --border-radius: 30px;
+}
+
+body {
+  background-color: var(--background-color);
+>>>>>>> ec5bc12aadbec775aec3ef64a4f97f723e398f48
   color: var(--text-color);
   min-height: 100vh;
   font-size: clamp(16px, 4vw, 18px);
@@ -37,6 +50,7 @@ body {
   box-sizing: border-box;
   display: flex;
   justify-content: center;
+<<<<<<< HEAD
   align-items: flex-start;
 }
 
@@ -125,6 +139,11 @@ body {
 
 body::-webkit-scrollbar {
   display: none;
+=======
+  align-items: center;
+  min-height: 100vh;
+  font-size: 16px;
+>>>>>>> ec5bc12aadbec775aec3ef64a4f97f723e398f48
 }
 
 .app-container {
@@ -132,16 +151,20 @@ body::-webkit-scrollbar {
   max-width: min(95vw, 500px);
   padding: clamp(12px, 3vw, 24px);
   text-align: center;
+<<<<<<< HEAD
   border-radius: var(--border-radius);
   transition: transform var(--transition-speed) ease;
   margin: 0 auto;
   box-sizing: border-box;
+=======
+>>>>>>> ec5bc12aadbec775aec3ef64a4f97f723e398f48
 }
 
 .header {
   display: flex;
   justify-content: center;
   align-items: center;
+<<<<<<< HEAD
   margin-bottom: 32px;
 }
 
@@ -153,10 +176,20 @@ body::-webkit-scrollbar {
   color: var(--text-color);
   margin: 0;
   opacity: 0.9;
+=======
+  margin-bottom: 2rem;
+}
+
+.skycast-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--text-color);
+>>>>>>> ec5bc12aadbec775aec3ef64a4f97f723e398f48
 }
 
 .weather-card {
   background: var(--glass-bg);
+<<<<<<< HEAD
   backdrop-filter: blur(8px);
   border-radius: var(--border-radius);
   padding: 32px 24px;
@@ -168,67 +201,59 @@ body::-webkit-scrollbar {
 .weather-card:hover {
   transform: translateY(-4px);
   background: var(--glass-hover);
+=======
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  margin: 20px 0;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+>>>>>>> ec5bc12aadbec775aec3ef64a4f97f723e398f48
 }
 
 .forecast-container {
   display: flex;
+<<<<<<< HEAD
   justify-content: center;
   gap: 16px;
   margin-top: 16px;
   padding: 8px 0;
   padding: 15px;
+=======
+  overflow-x: auto;
+  gap: 1rem;
+  padding: 1rem;
+>>>>>>> ec5bc12aadbec775aec3ef64a4f97f723e398f48
   justify-content: center;
   margin: 30px auto;
-  width: 95%;
-  max-width: 500px;
+  width: 100%;
 }
 
 .forecast-item {
   background: var(--glass-bg);
-  padding: 20px;
+  border: 1px solid var(--glass-border);
+  padding: 1.5rem;
   border-radius: var(--border-radius);
-  min-width: 140px;
+  min-width: 120px;
   text-align: center;
-  font-size: 18px;
-  transition: transform 0.3s ease;
-}
-
-.app-container.dark-mode .forecast-item {
-  background: rgba(0, 0, 0, 0.4);
-}
-
-.forecast-item:hover {
-  transform: translateY(-5px);
 }
 
 .weather-icon {
-  animation: fadeIn 0.8s ease-in-out, weatherFloat 3s ease-in-out infinite;
+  color: var(--text-color);
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Hide scrollbar */
+.forecast-container::-webkit-scrollbar {
+  display: none;
 }
 
-@keyframes weatherFloat {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-15px);
-  }
-  100% {
-    transform: translateY(0);
-  }
+.forecast-container {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 @media (max-width: 768px) {
+<<<<<<< HEAD
   body {
     font-size: clamp(14px, 4vw, 16px);
     padding: clamp(8px, 2vw, 16px);
@@ -250,25 +275,33 @@ body::-webkit-scrollbar {
 
   .forecast-container {
     gap: clamp(6px, 1.5vw, 12px);
+=======
+  .skycast-title {
+    font-size: 2rem;
+  }
+
+  .weather-card {
+    padding: 1.5rem;
+  }
+
+  .forecast-item {
+    min-width: 100px;
+    padding: 1rem;
+>>>>>>> ec5bc12aadbec775aec3ef64a4f97f723e398f48
   }
 }
 
 @media (max-width: 480px) {
-  body {
-    font-size: 15px;
-  }
-
   .skycast-title {
-    font-size: 22px;
+    font-size: 1.8rem;
   }
 
   .weather-card {
-    padding: 10px;
-    margin: 10px 0;
+    padding: 1rem;
   }
 
   .forecast-item {
-    min-width: 80px;
-    padding: 6px;
+    min-width: 90px;
+    padding: 0.8rem;
   }
 }

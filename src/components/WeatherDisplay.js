@@ -23,6 +23,7 @@ function WeatherDisplay({ data }) {
   const getWeatherIcon = (weather) => {
     switch (weather?.main) {
       case "Clear":
+<<<<<<< HEAD
         return <WiDaySunny size={60} className="icon" />;
       case "Rain":
         return <WiRain size={60} className="icon" />;
@@ -37,11 +38,38 @@ function WeatherDisplay({ data }) {
         return <WiThunderstorm size={60} className="icon" />;
       default:
         return <WiCloud size={60} className="icon" />;
+=======
+        return <WiDaySunny size={80} className="weather-icon" />;
+      case "Rain":
+        return <WiRain size={80} className="weather-icon" />;
+      case "Clouds":
+        return <WiCloudy size={80} className="weather-icon" />;
+      case "Snow":
+        return <WiSnow size={80} className="weather-icon" />;
+      case "Thunderstorm":
+        return <WiThunderstorm size={80} className="weather-icon" />;
+      default:
+        return <WiCloud size={80} className="weather-icon" />;
+>>>>>>> ec5bc12aadbec775aec3ef64a4f97f723e398f48
     }
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        type: "spring",
+        stiffness: 150,
+      },
+    },
   };
 
   return (
     <motion.div
+<<<<<<< HEAD
       className="weather-card glass"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -75,6 +103,27 @@ function WeatherDisplay({ data }) {
         <div>
           <div style={{ fontSize: '0.9rem', opacity: 0.7 }}>Wind</div>
           <div style={{ fontWeight: 700 }}>{data?.wind?.speed || 0} m/s</div>
+=======
+      className="weather-card"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <h2>{data.name}, {data.sys.country}</h2>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
+        {getWeatherIcon(weather)}
+        <h1>{Math.round(data.main.temp)}°C</h1>
+      </div>
+      <p style={{ textTransform: 'capitalize' }}>{weather.description}</p>
+      <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '2rem' }}>
+        <div>
+          <p>Humidity</p>
+          <p>{data.main.humidity}%</p>
+        </div>
+        <div>
+          <p>Wind Speed</p>
+          <p>{data.wind.speed} m/s</p>
+>>>>>>> ec5bc12aadbec775aec3ef64a4f97f723e398f48
         </div>
       </div>
     </motion.div>
