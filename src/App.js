@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import SearchBar from "./components/SearchBar";
-import WeatherDisplay from "./components/WeatherDisplay";
-import ForecastDisplay from "./components/ForecastDisplay";
-import LoadingSpinner from "./components/LoadingSpinner";
+import { motion, AnimatePresence } from "framer-motion";
 import "./App.css";
+
 
 function App() {
   const [weatherData, setWeatherData] = useState(null);
@@ -20,12 +18,18 @@ function App() {
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
       );
       const weatherJson = await weatherRes.json();
+      if (!weatherRes.ok) {
+        throw new Error(weatherJson.message || 'Failed to fetch weather data');
+      }
 
       // Fetch forecast data
       const forecastRes = await fetch(
         `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`
       );
       const forecastJson = await forecastRes.json();
+      if (!forecastRes.ok) {
+        throw new Error(forecastJson.message || 'Failed to fetch forecast data');
+      }
 
       setWeatherData(weatherJson);
 
@@ -53,19 +57,46 @@ function App() {
     setLoading(false);
   };
 
+  // Lazy load components
+  const SearchBar = React.lazy(() => import("./components/SearchBar"));
+  const WeatherDisplay = React.lazy(() => import("./components/WeatherDisplay"));
+  const ForecastDisplay = React.lazy(() => import("./components/ForecastDisplay"));
+  const LoadingSpinner = React.lazy(() => import("./components/LoadingSpinner"));
+
   return (
-    <div className="app-container">
-      <header className="header">
-        <h1 className="skycast-title">SkyCast</h1>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <SearchBar onSearch={fetchWeather} />
-          {loading && <LoadingSpinner />}
-        </div>
+    <div className="app-container glass">
+      <header className="header" style={{ justifyContent: 'center', marginBottom: 24 }}>
+        <h1 className="skycast-title" style={{ fontFamily: 'Lexend', fontWeight: 700, color: '#fff', letterSpacing: 2 }}>SkyCast</h1>
       </header>
-      <div className="weather-container">
-        {weatherData && <WeatherDisplay data={weatherData} />}
-        {forecastData.length > 0 && <ForecastDisplay forecast={forecastData} />}
-      </div>
+      <React.Suspense fallback={<div style={{ textAlign: 'center', margin: 32 }}><span>Loading...</span></div>}>
+        <SearchBar onSearch={fetchWeather} />
+      </React.Suspense>
+      <AnimatePresence mode="wait">
+        {loading ? (
+          <motion.div key="loading" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            <React.Suspense fallback={<div>Loading...</div>}>
+              <LoadingSpinner />
+            </React.Suspense>
+          </motion.div>
+        ) : weatherData ? (
+          <motion.div key="weather" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.5 }}>
+            <React.Suspense fallback={<div>Loading...</div>}>
+              <WeatherDisplay data={weatherData} />
+            </React.Suspense>
+            {forecastData.length > 0 && (
+              <React.Suspense fallback={<div>Loading...</div>}>
+                <ForecastDisplay forecast={forecastData} />
+              </React.Suspense>
+            )}
+          </motion.div>
+        ) : (
+          <motion.div key="empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            <div style={{ textAlign: 'center', margin: '32px 0', color: '#bbb' }}>
+              <p>Enter a city to view the weather.</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

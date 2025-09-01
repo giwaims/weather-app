@@ -1,33 +1,15 @@
 .spinner-container {
-  display: inline-flex;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  margin-left: 10px;
-  height: 100%;
+  padding: 16px;
 }
 
-.ios-spinner {
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-}
-
-.ios-spinner:after {
-  content: " ";
-  display: block;
-  width: 20px;
-  height: 20px;
-  margin: 2px;
-  border-radius: 50%;
-  border: 3px solid #fff;
-  border-color: #fff transparent #fff transparent;
-  animation: ios-spin 1.2s linear infinite;
-}
-
-@keyframes ios-spin {
-  0% {
+@keyframes spin {
+  from {
     transform: rotate(0deg);
   }
-  100% {
+  to {
     transform: rotate(360deg);
   }
 }
