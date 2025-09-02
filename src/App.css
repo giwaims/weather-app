@@ -53,18 +53,21 @@ body {
 
 .glass:hover {
   background: var(--glass-hover);
-  border-color: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 12px 32px 0 rgba(0, 0, 0, 0.5);
+  transform: translateY(-2px);
 }
 
 /* Monochrome icons */
 .icon {
   filter: grayscale(1) brightness(2);
-  transition: transform var(--transition-speed) ease;
+  transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .icon:hover {
-  transform: scale(1.1);
+  transform: scale(1.05) rotate(5deg);
+  filter: grayscale(0) brightness(1.2);
+  cursor: pointer;
 }
 
 /* Forecast container responsive styles */
@@ -87,6 +90,14 @@ body {
   max-width: none;
   padding: clamp(12px, 3vw, 20px);
   font-size: clamp(14px, 3.5vw, 18px);
+  transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.forecast-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 /* Mobile optimizations */
