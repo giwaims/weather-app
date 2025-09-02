@@ -1,9 +1,44 @@
-SkyCast Weather Application Documentation
+# SkyCast Weather Application
 
- Overview
+## Overview
 SkyCast is a modern, responsive weather application built with React. It features a sleek, glass-morphism design with animated weather icons and a minimalist UI. The app allows users to search for locations and view current weather conditions along with a two-day forecast.
 
- Tech Stack
+## Getting Started
+
+### Prerequisites
+- Node.js (v16 or higher)
+- npm (v8 or higher)
+- OpenWeather API key
+
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/giwaims/weather-app.git
+   cd weather-app
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env` file in the root directory and add your OpenWeather API key:
+   ```
+   REACT_APP_WEATHER_API_KEY=your_api_key_here
+   ```
+
+4. Start the development server:
+   ```bash
+   npm start
+   ```
+
+### Building for Production
+To create a production build:
+```bash
+npm run build
+```
+
+## Tech Stack
 - Framework: React 19.0.0
 - Styling: CSS with custom animations and responsive design
 - Icons: React Icons (Weather Icons)
@@ -11,42 +46,53 @@ SkyCast is a modern, responsive weather application built with React. It feature
 - HTTP Client: Native fetch API
 - Fonts: Poppins (main font) and Orbitron (for title)
 
- Architecture
+## Architecture
 
- Component Structure
-1. App.js - Main component that manages state and API calls
-2. SearchBar.js - Expandable search input for location queries
-3. WeatherDisplay.js - Displays current weather conditions
-4. ForecastDisplay.js - Shows weather forecast for upcoming days
-5. LoadingSpinner.js - Loading indicator for API requests
+### Component Structure
+1. `App.js` - Main component that manages state and API calls
+2. `SearchBar.js` - Expandable search input for location queries
+3. `WeatherDisplay.js` - Displays current weather conditions
+4. `ForecastDisplay.js` - Shows weather forecast for upcoming days
+5. `LoadingSpinner.js` - Loading indicator for API requests
 
- Data Flow
+### Data Flow
 1. User enters a city name in SearchBar
 2. App.js fetches weather data from OpenWeather API
 3. Current weather is displayed in WeatherDisplay
 4. Forecast data is processed and displayed in ForecastDisplay
 
- Key Features
+## Features
 
- 1. Expandable Search Bar
+### 1. Expandable Search Bar
 - Minimizes to an icon when not in use
 - Expands on click for clean UI
 - Handles keyboard events (Enter to search, Escape to cancel)
 
- 2. Weather Display
+### 2. Weather Display
 - Shows location, temperature, and conditions
 - Displays "feels like" temperature, humidity, and wind speed
 - Dynamic weather icons based on conditions
 
- 3. Forecast Display
+### 3. Forecast Display
 - Shows weather forecast for the next two days
 - Each forecast includes date, weather icon, temperature, and conditions
 - Horizontally scrollable on smaller screens
 
- 4. Responsive Design
+### 4. Responsive Design
 - Adapts to desktop, tablet, and mobile screen sizes
 - Font sizes and spacing adjust based on device width
 - Elements maintain readability and aesthetics across devices
+
+## Contributing
+Feel free to submit issues and enhancement requests.
+
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+- OpenWeather API for weather data
+- React Icons for weather icons
+- Contributors and maintainers
 
  5. Visual Effects
 - Glass-morphism design (translucent elements with blur)
